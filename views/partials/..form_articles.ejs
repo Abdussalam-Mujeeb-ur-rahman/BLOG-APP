@@ -1,0 +1,18 @@
+<form action="/articles/createNewArticle" method="post">
+    <div>
+        <label for="title">Title</label><br/>
+        <input type="text" name="title" id="title" required placeholder="title of your article" /><br/>
+    </div>
+    <div>
+        <label for="description">Description</label><br/>
+        <textarea name="description" id="description" required placeholder="description of your article"></textarea><br/>
+    </div>
+    <div>
+        <label for="details">Details</label><br/>
+        <textarea name="details" id="details" placeholder="in markdown language" required></textarea><br/>
+    </div>
+    <div>
+        <a href="/">Cancel</a>
+        <button type="submit">Save</button>
+    </div>
+ </form>
