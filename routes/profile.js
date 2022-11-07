@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const Article = require('../Models/articleModel')
-const mainController = require('../Controller/mainController')
+const profileController = require('../Controller/profileController')
 
-router.get('/', mainController.getHomePage)
 
+
+router.get('/', profileController.getProfile)
 
 module.exports = router

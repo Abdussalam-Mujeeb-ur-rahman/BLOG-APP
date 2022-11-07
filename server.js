@@ -5,12 +5,15 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express()
 const passport = require('passport')
+const methodOverride = require('method-override')
 const mainRouter = require('./routes/main')
+const profileRouter = require('./routes/profile')           
 const authRouter = require('./routes/authRoute')
 const articlesRouter = require('./routes/articles')
 app.use(express.urlencoded({extended:false}))
 app.set('view engine', 'ejs')
 app.set('views', 'views')
+app.use(methodOverride('_method'))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 dotenv.config()
@@ -26,8 +29,9 @@ mongoose.connect(process.env.MONGO_URL, {
 
 app.use('/', authRouter)
 app.use('/articles', articlesRouter)
+app.use('/profile', profileRouter)
 
-app.get('/', mainRouter)
+app.get('/', mainRouter) 
 
 
 

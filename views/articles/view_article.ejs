@@ -1,7 +1,14 @@
 <%- include('../partials/..header.ejs') %>
-<div>
+<div class="mb4">
     <h1><%= article.title %></h1>
     <p class="shade">created by author, <%= article.createdAt.toLocaleDateString() %></p>
+</div>
+<div class="mt10">
+  <a href="/" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">All Articles</a>  
+  <a href="/articles/edit/<%= article.id %>" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Edit Article</a>
+</div>
+<div class="mt50">
+    <%= article.details %>
 </div>
 
 <%- include('../partials/..footer.ejs') %>

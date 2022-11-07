@@ -7,6 +7,15 @@ router.get('/createNewArticle', articlesController.newArticle)
 
 router.post('/createNewArticle', articlesController.createNewArticle)
 
-router.get('/:id', articlesController.getArticleById)
+router.get('/:slug', articlesController.getArticleBySlug)
+
+router.get('/edit/:id', articlesController.editArticle)
+
+router.get('/getArticle', articlesController.getArticle)
+
+
+router.put('/:id',articlesController.updateArticle)
+
+router.delete('/:id', articlesController.deleteById)
 
 module.exports = router

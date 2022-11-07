@@ -1,24 +1,7 @@
-function getHomePage(req, res){
-    const articles = [ 
-        {
-            title: 'thefirstarticle',
-            decription: 'the crazy one',
-            author: 'Abdussalam',
-            createdAt: new Date()
-        },
-         {
-            title: 'the2article',
-            decription: 'the mad psychologist',
-            author: 'sodiq',
-            createdAt: new Date()
-        },
-        {
-            title: 'the3article',
-            decription: 'the sensed future',
-            author: 'soothsayer mikel',
-            createdAt: new Date()
-        }
-    ]
+const Article = require('../Models/articleModel')
+
+async function getHomePage(req, res){
+    const articles = await Article.find().sort({ createdAt: 'desc' })
     try {
         res.render('articles/index', { articles: articles})
     } catch (error) {
@@ -27,6 +10,8 @@ function getHomePage(req, res){
         })
     }
 }
+
+
 
 module.exports = {
     getHomePage

@@ -1,0 +1,25 @@
+<%- include('../partials/..header.ejs') %>
+
+<h1>Edit Article</h1>
+
+<form action="/articles/<%= article.id %>?_method=PUT" method="post">
+    <div>
+        <label for="title">Title</label><br/>
+        <input type="text" value="<%= article.title %>" name="title" id="title" required placeholder="title of your article" /><br/>
+    </div>
+    <div>
+        <label for="description">Description</label><br/>
+        <textarea name="description" id="description" required placeholder="description of your article"><%= article.description %></textarea><br/>
+    </div>
+    <div>
+        <label for="details">Details</label><br/>
+        <textarea name="details" id="details" placeholder="in markdown language" required><%= article.details %></textarea><br/>
+    </div>
+    <div>
+        <a href="/">Cancel</a>
+        <button type="submit">Save</button>
+    </div>
+ </form>
+
+
+<%- include('../partials/..footer.ejs') %>
