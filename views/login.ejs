@@ -1,18 +1,19 @@
 <%- include('./partials/..header.ejs') %>
 
-<h1>LOG IN!</h1>
+<h1>LOG IN!</h1><br>
+<p class="red-clr ft-size-18"><%= message %></p><br>
 <form action="/login" method="post">
-    <div>
-        <label for="email">EMAIL</label><br>
-        <input type="email" name="email" id="email" placeholder="input your email" required><br>
+    <div class="mt10">
+        <label for="email" class="bold">EMAIL</label><br>
+        <input type="email" name="email" id="email" placeholder="input your email" required value="<%= userInfo.email %>" class="ft-size-18 pd-10 b-o-none wd300"><br>
     </div>
-    <div>
-        <label for="password">PASSWORD</label><br>
-        <input type="password" name="password" id="password" placeholder="input your password" required><br>
+    <div class="mt10">
+        <label for="password" class="bold">PASSWORD</label><br>
+        <input type="password" name="password" id="password" placeholder="input your password" required class="ft-size-18 pd-10 b-o-none wd300"><br>
     </div>
-    <div>
-        <button type="submit">LOG IN</button><br>
-        <p>don't have an account??, <a href="/signup">SIGNUP</a></p>
+    <div class="mt10">
+        <button type="submit" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr b-o-none">LOG IN</button><br>
+        <p>don't have an account??, <a href="/signup" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr b-o-none">SIGNUP</a></p>
     </div>
 </form>
 

@@ -13,7 +13,8 @@ async function getHomePage(req, res){
 
 function getLoginPage(req, res){
     try {
-        res.status(200).render('login')
+        const {email, password} = req.body
+        res.status(200).render('login', { message: '', userInfo: req.body })
     } catch (error) {
         res.status.json({ error })
     }

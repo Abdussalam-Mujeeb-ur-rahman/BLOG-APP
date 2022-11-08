@@ -25,16 +25,16 @@ async function signup(req, res, next) {
     }
 }
 
-async function login(req, res){
+async function login(req, res, next){
     res.setHeader('content-type', 'application/json');
     const { email, password } = req.body
     try {
         const user = await userModel.findOne({email})
-        if(!user){ res.json('User not found!') }
+        if(!user){ return next() }
 
         const validate = await bcrypt.compare( password, user.password)
         try {
-            if(!validate){ res.send('password or username not correct!') }            
+            if(!validate){ return next() }            
         } catch (error) {
             console.log(`error ${error}!`)
         }
@@ -42,9 +42,9 @@ async function login(req, res){
 
         //token
        const token = jwt.sign({name: user.email, id: user._id}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE })
-       return res.json({ token })
+       return res.cookie({ token }).status(200).send('pure')
     } catch (error) {
-        res.status(500)
+        res.status(500).json({message: error})
         console.log(`server error`)
     }
 }
