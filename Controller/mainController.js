@@ -11,8 +11,26 @@ async function getHomePage(req, res){
     }
 }
 
+function getLoginPage(req, res){
+    try {
+        res.status(200).render('login')
+    } catch (error) {
+        res.status.json({ error })
+    }
+}
+
+function getSignupPage(req, res){
+    try {
+        const {first_name, last_name, email, password} = req.body
+        res.status(200).render('signup', { message: '', userInfo: req.body })
+    } catch (error) {
+        res.status.json({ error })
+    }
+}
 
 
 module.exports = {
-    getHomePage
+    getHomePage,
+    getLoginPage,
+    getSignupPage
 }

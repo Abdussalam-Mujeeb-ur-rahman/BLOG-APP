@@ -1,0 +1,49 @@
+<%- include('./partials/..header.ejs') %>
+
+<h1>SIGN UP!</h1><br>
+<p class="red-clr ft-size-18"><%= message %></p><br>
+<form action="/signup" method="post">
+    <div class="mt10">
+        <label for="first_name" class="bold">FIRST NAME</label><br>
+        <input type="text" name="first_name" id="first_name" placeholder="input your first name" minlength="4" required value="<%= userInfo.first_name %>" class="ft-size-18 pd-10 b-o-none wd300"><br>
+    </div>
+    <div class="mt10">
+        <label for="last_name" class="bold">LAST NAME</label><br>
+        <input type="text" name="last_name" id="last_name" placeholder="input your last name" minlength="4" required value="<%= userInfo.last_name %>" class="ft-size-18 pd-10 b-o-none wd300 "><br>
+    </div>
+    <div class="mt10">
+        <label for="email" class="bold">EMAIL</label><br>
+        <input type="email" name="email" id="email" placeholder="input your email" required value="<%= userInfo.email %>" class="ft-size-18 pd-10 b-o-none wd300 "><br>
+    </div>
+    <div class="mt10">
+        <label for="password" class="bold">PASSWORD</label><br>
+        <input type="password" name="password" id="password" placeholder="input your password" required value="<%= userInfo.password %>" class="ft-size-18 pd-10 b-o-none wd300 "><br>
+    </div>
+    <div class="mt10">
+        <label for="confirm_password" class="bold">CONFIRM PASSWORD</label><br>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm your password" required class="ft-size-18 pd-10 b-o-none wd300 "><br>
+        <p id="confirm"></p>
+    </div>
+    <div class="mt10">
+        <button type="submit" id="sign_up" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr b-o-none">SIGN UP</button><br>
+        <p class="ft-size-18 mt10">already have an account??, <a href="/login" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr b-o-none">LOG IN</a></p>
+    </div>
+
+    <script>
+        const password = document.getElementById('password')
+        const confirm_password = document.getElementById('confirm_password')
+        const sign_up = document.getElementById('sign_up')
+        const confirmMessage = document.getElementById('confirm')
+
+        sign_up.addEventListener('click', (e) => {
+            if(password.value !== confirm_password.value) return e.preventDefault()
+        })
+
+        sign_up.addEventListener('mouseenter', (e) => {
+            if(password.value !== confirm_password.value) return confirmMessage.innerText = 'passwords must match! ';
+        })
+    </script>
+</form>
+
+
+<%- include('./partials/..footer.ejs') %>
