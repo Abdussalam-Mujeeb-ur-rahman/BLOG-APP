@@ -4,6 +4,10 @@ const slugify = require('slugify')
 const domPurify = require('dompurify')
 const { JSDOM } = require('jsdom')
 const createDomPurifier = domPurify(new JSDOM().window)
+const showdown = require('showdown')
+const converter = new showdown.Converter()
+const { convert } = require('html-to-text');
+const htmlToFormattedText = require("html-to-formatted-text");
 
 articleSchema = new mongoose.Schema({
     title: {
@@ -24,10 +28,24 @@ articleSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    // cleansedHTML: {
-    //     type: String,
-    //     required: true
-    // }
+    author: {
+        type: String,
+        required: true,
+        default: 'author'
+    },
+    state: {
+        type: String,
+        required: true,
+        default: 'draft'
+    },
+    read_count: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    cleansedHTML: {
+        type: String
+    }
 },{ timestamps: true})
 
 articleSchema.pre('validate', function(next){
@@ -35,9 +53,10 @@ articleSchema.pre('validate', function(next){
         this.slug = slugify(this.title, { lower: true, strict: true})
     }
 
-    // if(this.details){
-    //     this.cleansedHTML = createDomPurifier.sanitize(marked.(this.details)) 
-    // }
+    if(this.details){
+        this.cleansedHTML = convert( converter.makeHtml(this.details) )
+        
+    }
 
     next()
 })

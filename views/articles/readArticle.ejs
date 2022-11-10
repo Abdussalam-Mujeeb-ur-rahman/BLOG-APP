@@ -1,0 +1,14 @@
+<%- include('../partials/..header.ejs') %>
+<div class="mb4">
+    <h1 class="bold"><%= article.title %></h1>
+    <p class="shade ft-size-18">created by <%= article.author %>, <%= article.createdAt.toLocaleDateString() %></p><br>
+    <span class="shade ft-size-18"><%= article.state %></span>
+</div>
+<div class="mt50">
+  <a href="/" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">All Articles</a> 
+</div>
+<div class="mt50">
+    <%= article.cleansedHTML %>
+</div>
+
+<%- include('../partials/..footer.ejs') %>

@@ -1,13 +1,9 @@
 <%- include('../partials/..header.ejs') %>
 
     <div class="container">
-      <h1 class="mb4 txt-cnt pd-10">BLOG SITE</h1>
-      <h2 class="txt-cnt pd-10">WELCOME, <%= user %></h2>
-      <p class="txt-cnt"><%= message %></p><br><br>
       <div class="flex-row j-center">
-      <a href="/articles" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Write Article</a>
+      <a href="/" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Get All Articles</a>
       <a href="/articles/searchArticle" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Get Articles</a>
-      <a href="/profile" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Go to profile</a> <br>
       </div>
 
       <div class="grid">
@@ -17,7 +13,7 @@
                <p class="shade"><%= article.createdAt.toLocaleDateString() %>, created by <%= article.author %></p><br><br>
                <p><%= article.description %></p>
                <div class="mt10">
-                <a href="articles/readArticle/<%= article.slug %> "class="pd-5 bg-green green-blue-hover ft-size-18 txt-cnt clr">Read</a> 
+                <a href="/articles/readArticle/<%= article.slug %>" class="pd-5 bg-green green-blue-hover ft-size-18 txt-cnt clr">Read</a>
                </div>
       
             </div>

@@ -4,20 +4,21 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express()
-const cookieParser = require('cookie-parser')
 const methodOverride = require('method-override')
 const mainRouter = require('./routes/main')
 const profileRouter = require('./routes/profile')           
 const authRouter = require('./routes/authRoute')
 const articlesRouter = require('./routes/articles')
-const isAuthenticated = require('./authentication/auth')
+const isAuthenticated = require('./authentication/auth');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
 app.set('view engine', 'ejs')
 app.set('views', 'views')
-app.use(cookieParser())
 app.use(methodOverride('_method'))
 app.use(logger('dev'))
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 dotenv.config()
 const PORT = process.env.PORT
 
@@ -29,10 +30,12 @@ mongoose.connect(process.env.MONGO_URL, {
 
 
 app.use('/', authRouter)
-app.use('/articles',isAuthenticated, articlesRouter)
+app.use('/articles', isAuthenticated, articlesRouter)
 app.use('/profile', isAuthenticated, profileRouter)
 
 app.use('/', mainRouter) 
+
+
 
 
 

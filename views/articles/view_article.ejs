@@ -1,14 +1,18 @@
 <%- include('../partials/..header.ejs') %>
 <div class="mb4">
-    <h1><%= article.title %></h1>
-    <p class="shade">created by author, <%= article.createdAt.toLocaleDateString() %></p>
+    <h1 class="bold"><%= article.title %></h1>
+    <p class="shade ft-size-18">created by <%= article.author %>, <%= article.createdAt.toLocaleDateString() %></p><br>
+    <span class="shade ft-size-18"><%= article.state %></span>
+    <form action="/articles/publishArticle/<%= article.id %>" method="post" class="inline">
+      <button type="submit" class="pd-10 bg-green green-blue-hover inline txt-cnt clr b-o-none">PUBLISH</button>
+    </form>
 </div>
-<div class="mt10">
+<div class="mt50">
   <a href="/" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">All Articles</a>  
   <a href="/articles/edit/<%= article.id %>" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Edit Article</a>
 </div>
 <div class="mt50">
-    <%= article.details %>
+    <%= article.cleansedHTML %>
 </div>
 
 <%- include('../partials/..footer.ejs') %>

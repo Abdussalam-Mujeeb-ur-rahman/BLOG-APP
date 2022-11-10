@@ -1,0 +1,23 @@
+<%- include('../partials/..header.ejs') %>
+
+    <div class="container">
+      <h1 class="mb4 txt-cnt pd-10">BLOG SITE</h1>
+      <div class="flex-row j-center">
+      <a href="/" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Get All Articles</a>
+      </div>
+
+
+      <form action="/articles/getArticleBySearch" method="post" class="mb4 txt-cnt pd-10">
+        <fieldset>
+          <legend class="ft-size-18 bold">Author</legend>
+          <div style="margin: 5px;">
+            <input type="text" name="author" id="author" style="width: 60%; padding: 5px;" class="ft-size-18">
+            <button type="submit" class="pd-10 bg-green green-blue-hover txt-cnt clr b-o-none">Search</button>
+          </div>
+
+        </fieldset>
+      </form>
+
+    </div>
+
+    <%- include('../partials/..footer.ejs') %>

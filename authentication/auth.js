@@ -1,14 +1,33 @@
-const userModel = require('../Models/UserModel');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
+const userModel = require('../Models/UserModel');
 
 const isAuthenticated = async (req,res,next)=>{
-    const {token} = req.cookies;
+    const token = req.cookies['token']
     try {
         if(!token){
-           return res.redirect('/login')
+            res.redirect('login')
         }
-        const verify = jwt.verify(token,process.env.JWT_SECRET);
-        req.user = await userModel.findById(verify.id);
+        try {
+            var verify = jwt.verify(token, process.env.JWT_SECRET);
+            // console.log("verifyId", verify.id)
+           
+        } catch (error) {
+            console.log(`error from verify ${error}`)
+            res.redirect('login')
+        }
+
+        const id = verify.id
+        // console.log("type of id is", typeof(id))
+
+        try {
+            req.user = await userModel.findById(id);
+            // console.log(req.user)
+        } catch (error) {
+            console.log(`error from userModel ${error}`)
+            res.send('Databe timeout!, please refresh your page or try again later!')
+        }
+        
         next();
     } catch (error) {
        return next(error); 

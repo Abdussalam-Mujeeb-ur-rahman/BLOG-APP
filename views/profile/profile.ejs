@@ -1,0 +1,36 @@
+<%- include('../partials/..header.ejs') %>
+
+    <div class="container">
+      <h1 class="mb4 txt-cnt pd-10">PROFILE</h1><br>
+      <h2 class="mb4 txt-cnt pd-10">WELCOME, <%= user.first_name %> <%= user.last_name %></h2>
+      <div class="flex-row j-center">
+        <a href="/articles" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Write Article</a>
+        <a href="/" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">All Articles</a>
+      </div>
+
+      
+      <div class="grid">
+        <% articles.forEach( article => { %>
+            <div class="pd-10 bx-sh mt10 wrap-texts">
+               <h4 class="ft-size-18"><%= article.title %></h4> 
+               <p class="shade"><%= article.createdAt.toLocaleDateString() %>, created by <%= article.author %></p><br>
+               <p class="shade ft-size-18">
+                <%= article.state %>
+               </p>
+               <br><br>
+               <p><%= article.description %></p>
+               <div class="mt10">
+                <a href="/articles/edit/<%= article.id %>" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Edit Article</a>
+                <a href="/articles/view/<%= article.id %>" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">View Article</a>
+                <form action="/articles/<%= article.id %>?_method=DELETE" method="post" class="inline">
+                  <button type="submit" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr b-o-none">Delete</button>
+                </form>
+               </div>
+      
+            </div>
+          <% }) %>
+      </div>
+
+    </div>
+
+    <%- include('../partials/..footer.ejs') %>

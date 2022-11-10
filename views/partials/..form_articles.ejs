@@ -1,18 +1,26 @@
 <form action="/articles/createNewArticle" method="post">
-    <div>
-        <label for="title">Title</label><br/>
-        <input type="text" name="title" id="title" required placeholder="title of your article" /><br/>
-    </div>
-    <div>
-        <label for="description">Description</label><br/>
-        <textarea name="description" id="description" required placeholder="description of your article"></textarea><br/>
-    </div>
-    <div>
-        <label for="details">Details</label><br/>
-        <textarea name="details" id="details" placeholder="in markdown language" required></textarea><br/>
-    </div>
-    <div>
-        <a href="/">Cancel</a>
-        <button type="submit">Save</button>
+    <div class="mb4 mt10">
+        <label for="title" class="bold ft-size-18">Title</label><br/>
+        <input type="text" name="title" id="title" required placeholder="title of your article" value="<%= article.title %>" minlength="10" class="ft-size-18 pd-10 b-o-none wd300"/><br/>
+    </div><br>
+    <div class="mb4 mt10">
+        <label for="description" class="bold ft-size-18">Description</label><br/>
+        <textarea name="description" id="description" required placeholder="description of your article" class="ft-size-18 pd-10 wd300" minlength="20"><%= article.description %></textarea><br/>
+    </div><br>
+    <div class="mb4 mt10">
+        <label for="details" class="bold ft-size-18">Details</label><br/>
+        <textarea name="details" id="details" placeholder="in markdown language" required class="ft-size-18 pd-10 wd300" minlength="50"><%= article.details %></textarea><br/>
+    </div><br>
+    <div class="mb4 mt10">
+        <button class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr b-o-none" id="cancel">Cancel</button>
+        <button type="submit" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr b-o-none">Save</button>
     </div>
  </form>
+
+ <script>
+    const cancel = document.getElementById('cancel')
+
+    cancel.addEventListener('click', (e) => {
+        history.back()
+    })
+ </script>
