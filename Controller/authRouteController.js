@@ -25,7 +25,7 @@ async function signup(req, res, next) {
     const token = jwt.sign(
       { name: result.email, id: result._id },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE }
+      { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) }
     );
     await userModel.findByIdAndUpdate(
       result.id,
@@ -70,7 +70,7 @@ async function login(req, res, next) {
     const token = jwt.sign(
       { name: user.email, id: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE }
+      { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60) }
     );
     await userModel.findByIdAndUpdate(user.id, { token: token }, { new: true });
 
