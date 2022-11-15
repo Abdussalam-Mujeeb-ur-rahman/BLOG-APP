@@ -88,7 +88,7 @@ async function login(req, res, next) {
       console.log(`error from jwt login ${error}`)
     }
 
-    console.log(token)
+    // console.log(token)
     // //articles
     const articles = await Article.find({ state: "PUBLISHED" }).sort({
       createdAt: "desc",

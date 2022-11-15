@@ -61,7 +61,7 @@ articleSchema.pre('validate', function(next){
     }
 
     if(this.details){
-        this.cleansedHTML = htmlToFormattedText( converter.makeHtml(this.details) )
+        this.cleansedHTML = convert( converter.makeHtml(this.details) )
         
     }
 

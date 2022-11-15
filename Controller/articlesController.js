@@ -15,7 +15,7 @@ async function newArticle(req, res) {
 
 async function createNewArticle(req, res, next) {
   // res.setHeader('content-type', 'text/html')
-  console.log(req.body)
+  // console.log(req.body)
   const { title, tags, description, details } = req.body;
 
   const existingTitle = await Article.findOne({ title });
