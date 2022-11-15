@@ -57,6 +57,9 @@ app.use((error, req, res, next) => {
     if(error.type == 'Server error'){
         res.redirect('Server_error')
     }
+    if(error.type == 'RedirectToLogin'){
+        res.redirect('profile/login')
+    }
     next()
 })
 
