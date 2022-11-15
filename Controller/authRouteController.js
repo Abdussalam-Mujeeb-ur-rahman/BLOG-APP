@@ -23,20 +23,19 @@ async function signup(req, res, next) {
     });
     //token
     try {
-      
-      const token = jwt.sign(
+      var token = jwt.sign(
         { name: result.email, id: result._id },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_EXPIRE }
       );
+      await userModel.findByIdAndUpdate(
+        result.id,
+        { token: token },
+        { new: true }
+      );
     } catch (error) {
       console.log(`error from login jwt ${error}`)
     }
-    await userModel.findByIdAndUpdate(
-      result.id,
-      { token: token },
-      { new: true }
-    );
     //articles
     const articles = await Article.find({ state: "PUBLISHED" }).sort({
       createdAt: "desc",
@@ -55,6 +54,11 @@ async function signup(req, res, next) {
   }
 }
 
+
+
+
+
+
 async function login(req, res, next) {
   const { email, password } = req.body;
   try {
@@ -72,13 +76,19 @@ async function login(req, res, next) {
     }
 
     //token
-    const token = jwt.sign(
-      { name: user.email, id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE }
-    );
-    await userModel.findByIdAndUpdate(user.id, { token: token }, { new: true });
+    try {
+      
+      var token = jwt.sign(
+        { name: user.email, id: user._id },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRE }
+      );
+      await userModel.findByIdAndUpdate(user.id, { token: token }, { new: true });
+    } catch (error) {
+      console.log(`error from jwt login ${error}`)
+    }
 
+    console.log(token)
     // //articles
     const articles = await Article.find({ state: "PUBLISHED" }).sort({
       createdAt: "desc",
