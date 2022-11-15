@@ -27,15 +27,16 @@ async function signup(req, res, next) {
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRE }
     );
-    await userModel.findByIdAndUpdate(
-      result.id,
-      { token: token },
-      { new: true }
-    );
-    //articles
-    const articles = await Article.find({ state: "PUBLISHED" }).sort({
-      createdAt: "desc",
-    });
+    console.log(token)
+    // await userModel.findByIdAndUpdate(
+    //   result.id,
+    //   { token: token },
+    //   { new: true }
+    // );
+    // //articles
+    // const articles = await Article.find({ state: "PUBLISHED" }).sort({
+    //   createdAt: "desc",
+    // });
 
     res.cookie("token", token);
     res.render("articles/index", {
