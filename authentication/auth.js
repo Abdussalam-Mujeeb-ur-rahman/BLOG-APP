@@ -4,9 +4,10 @@ const userModel = require('../Models/UserModel');
 
 const isAuthenticated = async (req,res,next)=>{
     const token = req.cookies['token']
+    const userInfo = { email : `your email should be here!` }
     try {
         if(!token){
-            res.render('profile/login')
+            return res.render('login', { message: 'Please log in to access all articles and build interesting ones ', userInfo: userInfo  })
         }
         try {
             var verify = jwt.verify(token, process.env.JWT_SECRET);
@@ -14,7 +15,7 @@ const isAuthenticated = async (req,res,next)=>{
            
         } catch (error) {
             console.log(`error from verify ${error}`)
-             res.render('profile/login')
+             return res.render('login', { message: 'Please log in to access all articles and build interesting ones ', userInfo: userInfo })
         }
 
         const id = verify.id
