@@ -6,7 +6,7 @@ const isAuthenticated = async (req,res,next)=>{
     const token = req.cookies['token']
     try {
         if(!token){
-            res.redirect('login')
+           return res.redirect('login')
         }
         try {
             var verify = jwt.verify(token, process.env.JWT_SECRET);
@@ -14,7 +14,7 @@ const isAuthenticated = async (req,res,next)=>{
            
         } catch (error) {
             console.log(`error from verify ${error}`)
-            res.redirect('login')
+            return res.redirect('login')
         }
 
         const id = verify.id
