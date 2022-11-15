@@ -6,6 +6,10 @@
     <form action="/articles/publishArticle/<%= article.id %>" method="post" class="inline">
       <button type="submit" class="pd-10 bg-green green-blue-hover inline txt-cnt clr b-o-none">PUBLISH</button>
     </form>
+    <span class="shade ft-size-18 ml10">READ: <%= article.read_count %></span><br><br>
+    <% article.tags.forEach( tag => { %>
+      <span class="ft-size-18 bg-green ft-size-18 txt-cnt clr"><%= tag %></span>
+    <% }) %>
 </div>
 <div class="mt50">
   <a href="/" class="ft-size-18 pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">All Articles</a>  

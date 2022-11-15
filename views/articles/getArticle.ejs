@@ -9,9 +9,20 @@
 
       <form action="/articles/getArticleBySearch" method="post" class="mb4 txt-cnt pd-10">
         <fieldset>
-          <legend class="ft-size-18 bold">Author</legend>
+          <legend class="ft-size-18 bold">Search</legend>
           <div style="margin: 5px;">
-            <input type="text" name="author" id="author" style="width: 60%; padding: 5px;" class="ft-size-18">
+            <label for="author" class="ft-size-18 bold">Author</label><br>
+            <input type="text" name="author" id="author" style="width: 60%; padding: 5px;" class="ft-size-18"><br>
+          </div>
+          <div style="margin: 5px;">
+            <label for="title" class="ft-size-18 bold">Title</label><br>
+            <input type="text" name="title" id="title" style="width: 60%; padding: 5px;" class="ft-size-18"><br>
+          </div>
+          <div style="margin: 5px;">
+            <label for="tag" class="ft-size-18 bold">Tag</label><br>
+            <input type="text" name="tag" id="tag" style="width: 60%; padding: 5px;" class="ft-size-18"><br>
+          </div>
+          <div style="margin: 5px;">
             <button type="submit" class="pd-10 bg-green green-blue-hover txt-cnt clr b-o-none">Search</button>
           </div>
 

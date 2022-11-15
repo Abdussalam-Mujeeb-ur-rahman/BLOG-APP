@@ -14,7 +14,11 @@
         <% articles.forEach( article => { %>
             <div class="pd-10 bx-sh mt10 wrap-texts">
                <h4 class="ft-size-18"><%= article.title %></h4> 
-               <p class="shade"><%= article.createdAt.toLocaleDateString() %>, created by <%= article.author %></p><br><br>
+               <p class="shade"><%= article.createdAt.toLocaleDateString() %>, created by <%= article.author %></p><span class="shade ft-size-18">READ: <%= article.read_count %></span><br>
+                <% article.tags.forEach( tag => { %>
+                  <span class="ft-size-18 bg-green ft-size-18 txt-cnt clr"><%= tag %></span>
+                <% }) %>
+               <br><br>
                <p><%= article.description %></p>
                <div class="mt10">
                 <a href="articles/readArticle/<%= article.slug %> "class="pd-5 bg-green green-blue-hover ft-size-18 txt-cnt clr">Read</a> 

@@ -25,7 +25,7 @@ const isAuthenticated = async (req,res,next)=>{
             // console.log(req.user)
         } catch (error) {
             console.log(`error from userModel ${error}`)
-            res.send('Databe timeout!, please refresh your page or try again later!')
+            res.send('Database timeout!, please refresh your page or try again later!')
         }
         
         next();

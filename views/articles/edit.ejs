@@ -8,6 +8,14 @@
         <input type="text" value="<%= article.title %>" name="title" id="title" required class="ft-size-18 pd-10 b-o-none wd300" placeholder="title of your article" /><br/>
     </div>
     <div class="mb4 mt10">
+        <select name="tags" id="tags" multiple class="ft-size-18 pd-10 wd300">
+            <option value="music">music</option>
+            <option value="politics">politics</option>
+            <option value="programming">programming</option>
+            <option value="technology">technology</option> 
+            </select>
+    </div>
+    <div class="mb4 mt10">
         <label for="description" class="bold ft-size-18">Description</label><br/>
         <textarea name="description" id="description" class="ft-size-18 pd-10 b-o-none wd300" required placeholder="description of your article"><%= article.description %></textarea><br/>
     </div>

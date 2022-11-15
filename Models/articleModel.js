@@ -7,7 +7,7 @@ const createDomPurifier = domPurify(new JSDOM().window)
 const showdown = require('showdown')
 const converter = new showdown.Converter()
 const { convert } = require('html-to-text');
-const htmlToFormattedText = require("html-to-formatted-text");
+const htmlToFormattedText = require('html-to-formatted-text')
 
 articleSchema = new mongoose.Schema({
     title: {
@@ -45,6 +45,13 @@ articleSchema = new mongoose.Schema({
     },
     cleansedHTML: {
         type: String
+    },
+    tags: {
+        type: Array,
+        default: []
+    },
+    reading_time: {
+        type: String
     }
 },{ timestamps: true})
 
@@ -54,7 +61,7 @@ articleSchema.pre('validate', function(next){
     }
 
     if(this.details){
-        this.cleansedHTML = convert( converter.makeHtml(this.details) )
+        this.cleansedHTML = htmlToFormattedText( converter.makeHtml(this.details) )
         
     }
 

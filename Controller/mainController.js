@@ -5,9 +5,13 @@ require("dotenv").config();
 
 async function getHomePage(req, res) {
   const token = await req.cookies["token"];
-  const articles = await Article.find({ state: "PUBLISHED" }).sort({
-    createdAt: "desc",
-  });
+  const { page = 1, limit = 20 } = req.query;
+  const articles = await Article.find({ state: "PUBLISHED" })
+    .sort({
+      createdAt: "desc",
+    })
+    .limit(limit * 1)
+    .skip((page - 1) * limit);
 
   try {
     if (!token) {
@@ -32,13 +36,13 @@ async function getHomePage(req, res) {
   try {
     var verify = jwt.verify(token, process.env.JWT_SECRET);
   } catch (error) {
-    console.log(error)
-    return  res.render("articles/index", {
-        articles: articles,
-        user: "Guest",
-        message:
-          "Please sign up or log in to our blog site to get access to all articles and give rise to interesting ones!",
-      });
+    console.log(error);
+    return res.render("articles/index", {
+      articles: articles,
+      user: "Guest",
+      message:
+        "Please sign up or log in to our blog site to get access to all articles and give rise to interesting ones!",
+    });
   }
   const id = verify.id;
 
