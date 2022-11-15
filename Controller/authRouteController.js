@@ -22,21 +22,25 @@ async function signup(req, res, next) {
       password: hashedPassword,
     });
     //token
-    const token = jwt.sign(
-      { name: result.email, id: result._id },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRE }
+    try {
+      
+      const token = jwt.sign(
+        { name: result.email, id: result._id },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRE }
+      );
+    } catch (error) {
+      console.log(`error from login jwt ${error}`)
+    }
+    await userModel.findByIdAndUpdate(
+      result.id,
+      { token: token },
+      { new: true }
     );
-    console.log(token)
-    // await userModel.findByIdAndUpdate(
-    //   result.id,
-    //   { token: token },
-    //   { new: true }
-    // );
-    // //articles
-    // const articles = await Article.find({ state: "PUBLISHED" }).sort({
-    //   createdAt: "desc",
-    // });
+    //articles
+    const articles = await Article.find({ state: "PUBLISHED" }).sort({
+      createdAt: "desc",
+    });
 
     res.cookie("token", token);
     res.render("articles/index", {
