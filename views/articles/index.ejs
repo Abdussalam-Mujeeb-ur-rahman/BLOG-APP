@@ -1,9 +1,40 @@
 <%- include('../partials/..header.ejs') %>
 
-    <div class="container">
+<% if( user ){ %>
+  <div class="container">
+        <h1 class="mb4 txt-cnt pd-10">BLOG SITE</h1>
+        <h2 class="txt-cnt pd-10">WELCOME, <%= user %></h2>
+        <p class="txt-cnt"><%= message %></p><br><br>
+        <div class="flex-row j-center">
+        <a href="/articles" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Write Article</a>
+        <a href="/articles/searchArticle" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Get Articles</a>
+        <a href="/profile" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Go to profile</a> <br>
+        </div>
+  
+        <div class="grid">
+          <% articles.forEach( article => { %>
+              <div class="pd-10 bx-sh mt10 wrap-texts">
+                 <h4 class="ft-size-18"><%= article.title %></h4> 
+                 <p class="shade"><%= article.createdAt.toLocaleDateString() %>, created by <%= article.author %></p><span class="shade ft-size-18">READ: <%= article.read_count %></span><br>
+                  <% article.tags.forEach( tag => { %>
+                    <span class="ft-size-18 bg-green ft-size-18 txt-cnt clr"><%= tag %></span>
+                  <% }) %>
+                 <br><br>
+                 <p><%= article.description %></p>
+                 <div class="mt10">
+                  <a href="articles/readArticle/<%= article.slug %> "class="pd-5 bg-green green-blue-hover ft-size-18 txt-cnt clr">Read</a> 
+                 </div>
+        
+              </div>
+            <% }) %>
+        </div>
+      </div>
+    <%  }else{ %>
+      <div class="container">
       <h1 class="mb4 txt-cnt pd-10">BLOG SITE</h1>
-      <h2 class="txt-cnt pd-10">WELCOME, <%= user %></h2>
-      <p class="txt-cnt"><%= message %></p><br><br>
+      <h2 class="txt-cnt pd-10">WELCOME, GUEST</h2>
+      <p class="txt-cnt"><%= message %></p><br>
+      <p class="txt-cnt"><a href="/login" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr mt10">Login</a><a href="/signup" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr mt10">Signup</a></p><br><br>
       <div class="flex-row j-center">
       <a href="/articles" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Write Article</a>
       <a href="/articles/searchArticle" class="pd-10 bg-green green-blue-hover ft-size-18 txt-cnt clr">Get Articles</a>
@@ -27,7 +58,10 @@
             </div>
           <% }) %>
       </div>
-
     </div>
+    <% } %>
+
+
+   
 
     <%- include('../partials/..footer.ejs') %>

@@ -4,7 +4,7 @@ const userModel = require('../Models/UserModel');
 
 const isAuthenticated = async (req,res,next)=>{
     const token = req.cookies['token']
-    const userInfo = { email : `your email should be here!` }
+    const userInfo = { email : `` }
     try {
         if(!token){
             return res.render('login', { message: 'Please log in to access all articles and build interesting ones ', userInfo: userInfo  })
