@@ -66,3 +66,5 @@ app.use((error, req, res, next) => {
 app.listen(PORT, () => {
     console.log('Backend is running!')
 })
+
+module.exports = app
