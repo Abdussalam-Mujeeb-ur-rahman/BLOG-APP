@@ -86,8 +86,25 @@ function getSignupPage(req, res) {
   }
 }
 
+async function readArticle(req, res){
+  try {
+    const article = await Article.findOne({ slug: req.params.slug})  
+    try {
+      
+      await Article.findByIdAndUpdate(article.id, { read_count: article.read_count + 1 }, { new: true }) 
+    } catch (error) {
+      console.log(`error from read_count update ${error}`)
+    }
+    if( !article ) res.redirect('/')
+    res.render('articles/readArticle', { article: article })
+  } catch (error) {
+    res.json({ message: 'please check your id or refresh the page' })
+  }
+}
+
 module.exports = {
   getHomePage,
   getLoginPage,
   getSignupPage,
+  readArticle
 };

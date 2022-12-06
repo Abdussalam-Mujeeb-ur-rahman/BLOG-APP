@@ -4,8 +4,9 @@ const bcrypt = require('bcrypt')
 const userModel = require('../Models/UserModel')
 const router = require('express').Router()
 const authRouteController = require('../Controller/authRouteController')
+const validateUserMiddleware = require('../validator/userValidator')
 
-router.post('/signup', authRouteController.signup, (req, res) => {
+router.post('/signup', validateUserMiddleware, authRouteController.signup, (req, res) => {
     res.render('signup', { message: 'Username already exists!', userInfo: req.body })
 })
 router.post('/login', authRouteController.login, (req, res) => {

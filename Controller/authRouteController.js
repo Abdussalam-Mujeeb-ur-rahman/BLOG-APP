@@ -3,6 +3,9 @@ const Article = require("../Models/articleModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
+
+
+
 async function signup(req, res, next) {
   const { first_name, last_name, email, password } = req.body;
   try {

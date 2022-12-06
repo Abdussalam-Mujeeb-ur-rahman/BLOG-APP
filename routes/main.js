@@ -11,4 +11,6 @@ router.get('/login', mainController.getLoginPage)
 
 router.get('/signup', mainController.getSignupPage)
 
+router.get("/readArticle/:slug", mainController.readArticle)
+
 module.exports = router

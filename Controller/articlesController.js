@@ -48,8 +48,23 @@ async function getArticleBySlug(req, res){
 } 
 
 async function deleteById(req, res){
-  await Article.findByIdAndDelete(req.params.id)
-  res.redirect('/')
+  try {
+    await Article.findByIdAndDelete(req.params.id)
+
+    const { page = 1, limit = 20 } = req.query;
+    const articles = await Article.find({
+      author: req.user.first_name + " " + req.user.last_name,
+    })
+    .sort({
+        createdAt: "desc"
+    })
+    .limit(limit * 1)
+    .skip((page - 1) * limit);
+    
+    res.render("profile/profile", { user: req.user, articles: articles })
+  } catch (error) {
+    res.redirect('Server_error')
+  }
 }
 
 async function editArticle(req, res){
@@ -59,7 +74,7 @@ async function editArticle(req, res){
 
 async function updateArticle(req, res){
   try {
-      const article = await Article.findByIdAndUpdate(req.params.id, { title: req.body.title, description: req.body.description, details: req.body.details, state: 'draft' }, { new: true })
+      const article = await Article.findByIdAndUpdate(req.params.id, { title: req.body.title, tags: req.body.tags,description: req.body.description, details: req.body.details, state: 'draft' }, { new: true })
       res.render('articles/view_article', { article: article })
   } catch (error) {
       res.json({ message: error })
@@ -165,21 +180,21 @@ async function searchToGetArticle(req, res){
     }
 }
 
-async function readArticle(req, res){
-  try {
-    const article = await Article.findOne({ slug: req.params.slug})  
-    try {
+// async function readArticle(req, res){
+//   try {
+//     const article = await Article.findOne({ slug: req.params.slug})  
+//     try {
       
-      await Article.findByIdAndUpdate(article.id, { read_count: article.read_count + 1 }, { new: true }) 
-    } catch (error) {
-      console.log(`error from read_count update ${error}`)
-    }
-    if( !article ) res.redirect('/')
-    res.render('articles/readArticle', { article: article })
-  } catch (error) {
-    res.json({ message: 'please check your id or refresh the page' })
-  }
-}
+//       await Article.findByIdAndUpdate(article.id, { read_count: article.read_count + 1 }, { new: true }) 
+//     } catch (error) {
+//       console.log(`error from read_count update ${error}`)
+//     }
+//     if( !article ) res.redirect('/')
+//     res.render('articles/readArticle', { article: article })
+//   } catch (error) {
+//     res.json({ message: 'please check your id or refresh the page' })
+//   }
+// }
 
 
 
@@ -205,6 +220,6 @@ module.exports = {
   searchArticle,
   publishArticle,
   searchToGetArticle,
-  readArticle,
+  // readArticle,
   viewArticle
 };

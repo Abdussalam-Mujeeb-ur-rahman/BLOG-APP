@@ -26,7 +26,7 @@ userSchema = new mongoose.Schema({
         required: true,
         default: 'token'
     }
-},{ timestamps: true })
+})
 
 
 module.exports = mongoose.model('users', userSchema)
